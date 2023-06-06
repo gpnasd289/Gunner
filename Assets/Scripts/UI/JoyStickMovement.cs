@@ -28,10 +28,15 @@ public class JoyStickMovement : MonoBehaviour
     Vector3 stickFirstPosition;
     public Vector3 joyVec;
     float stickRadius;
+    Vector3 joyStickFirstPostion;
+
+    public Animator Anim;
     // Start is called before the first frame update
     void Start()
     {
         stickRadius = bGStick.gameObject.GetComponent<RectTransform>().sizeDelta.y / 2;
+        joyStickFirstPostion = bGStick.transform.position;
+        //Anim = GetComponent<Animator>();
     }
     public void PointDown()
     {
@@ -39,15 +44,16 @@ public class JoyStickMovement : MonoBehaviour
         smallStick.transform.position = Input.mousePosition;
         stickFirstPosition = Input.mousePosition;
         //setTrigger
+        //Anim.SetTrigger("WALK");
     }
     public void Drag (BaseEventData baseEventData)
     {
         PointerEventData pointerEventData = baseEventData as PointerEventData;
         Vector3 DragPosition = pointerEventData.position;
         joyVec = (DragPosition - stickFirstPosition).normalized;
-        Debug.Log(joyVec);
+        
         float stickDistance = Vector3.Distance(DragPosition, stickFirstPosition);
-        Debug.Log(stickDistance);
+        //Debug.Log(stickDistance);
         if(stickDistance < stickRadius)
         {
             smallStick.transform.position = stickFirstPosition + joyVec * stickDistance;
@@ -60,7 +66,10 @@ public class JoyStickMovement : MonoBehaviour
     public void Drop()
     {
         joyVec = Vector3.zero;
+        bGStick.transform.position = joyStickFirstPostion;
+        smallStick.transform.position = joyStickFirstPostion;
         //setTrigger
+        //Anim.SetTrigger("IDLE");
     }
     // Update is called once per frame
    
