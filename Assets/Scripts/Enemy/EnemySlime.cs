@@ -42,9 +42,9 @@ public class EnemySlime : EnemyMeleeFSM
 
     protected override void InitMonster()
     {
-        maxHp += (StageMgr.Instance.currentStage + 1) * 100f;
+        maxHp += (StageMgr.Instance.currentStage+1) * 100f;
         currentHp = maxHp;
-        dmg += (StageMgr.Instance.currentStage + 1) * 10f;
+        dmg += (StageMgr.Instance.currentStage+1) * 10f;
     }
 
     void Update()
@@ -65,8 +65,8 @@ public class EnemySlime : EnemyMeleeFSM
     {
         if (collision.transform.CompareTag("Projectile"))
         {
-            enemyCanvasGo.GetComponent<EnemyHpBar>().currentHp -= 250f;
-            currentHp -= 250f;
+            enemyCanvasGo.GetComponent<EnemyHpBar>().currentHp -= PlayerData.Instance.dmg;
+            currentHp -= PlayerData.Instance.dmg;
         }
     }
 }

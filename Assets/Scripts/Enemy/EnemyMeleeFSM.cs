@@ -85,7 +85,7 @@ public class EnemyMeleeFSM : EnemyBase
         nvAgent.speed = 30f;
         canAtk = false;
 
-        if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("IDLE"))
+        if (!Anim.GetCurrentAnimatorStateInfo(0).IsTag("IDLE"))
         {
             Anim.SetTrigger("Attack");
         }
@@ -101,7 +101,7 @@ public class EnemyMeleeFSM : EnemyBase
     {
         yield return null;
         //Move
-        if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("RUN"))
+        if (!Anim.GetCurrentAnimatorStateInfo(0).IsTag("RUN"))
         {
             Anim.SetTrigger("Run");
         }

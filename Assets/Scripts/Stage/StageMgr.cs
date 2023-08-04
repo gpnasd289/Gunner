@@ -32,7 +32,6 @@ public class StageMgr : MonoBehaviour
 
     public StartPositionArray[] startPositionArrays;
     //startPositionArrays[0] 1~10 Stage
-    //startPositionArrays[1] 11~20 Stage
 
     public List<Transform> StartPositionAngel = new List<Transform>();
     
@@ -42,7 +41,7 @@ public class StageMgr : MonoBehaviour
     
 
     public int currentStage = 0;
-    int LastStage = 20;
+    int LastStage = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +59,8 @@ public class StageMgr : MonoBehaviour
         {
             int arrayIndex = currentStage / 10;
             int randomIndex = Random.Range(0, startPositionArrays[arrayIndex].StartPosition.Count);
-            Player.transform.position = startPositionArrays[arrayIndex].StartPosition[randomIndex].position;
+            //Player.transform.position = startPositionArrays[arrayIndex].StartPosition[randomIndex].position;
+            Player.transform.position = startPositionArrays[arrayIndex].StartPosition[0].position;
             startPositionArrays[arrayIndex].StartPosition.RemoveAt(randomIndex);
         }
         else    //BossRoom or Angel

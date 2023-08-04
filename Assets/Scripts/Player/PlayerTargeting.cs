@@ -33,7 +33,7 @@ public class PlayerTargeting : MonoBehaviour
     public LayerMask layerMask;
     public List<GameObject> MonsterList = new List<GameObject>();
 
-    public GameObject PlayerBolt;
+    //public GameObject PlayerBolt;
     public Transform AttackPoint;
 
     public float atkSpd = 1f;
@@ -80,7 +80,7 @@ public class PlayerTargeting : MonoBehaviour
     void Attack()
     {
         PlayerMovement.Instance.Anim.SetFloat("AttackSpeed", atkSpd);
-        Instantiate(PlayerBolt, AttackPoint.position, transform.rotation);
+        Instantiate(PlayerData.Instance.PlayerBolt, AttackPoint.position, transform.rotation);
     }
     void SetTarget()
     {
@@ -160,7 +160,7 @@ public class PlayerTargeting : MonoBehaviour
                 PlayerMovement.Instance.Anim.SetBool("Walk", true);
             }
         }
-        else
+        else 
         {
             PlayerMovement.Instance.Anim.SetBool("Attack", false);
             PlayerMovement.Instance.Anim.SetBool("Idle", true);

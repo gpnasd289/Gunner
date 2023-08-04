@@ -43,4 +43,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     // Update is called once per frame
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("NextRoom"))
+        {
+            Debug.Log(" Get Next Room ");
+            StageMgr.Instance.NextStage();
+        }
+
+        if (other.transform.CompareTag("MeleeAtk"))
+        {
+            other.transform.parent.GetComponent<EnemySlime>().meleeAtkArea.SetActive(false);
+            PlayerHpBar.Instance.currentHp -= other.transform.parent.GetComponent<EnemySlime>().dmg;
+            PlayerData.Instance.currentHp -= other.transform.parent.GetComponent<EnemySlime>().dmg;
+
+            if (!Anim.GetCurrentAnimatorStateInfo(0).IsTag("Dmged"))
+            {
+                Anim.SetTrigger("Dmged");
+                //Instantiate(EffectSet.Instance.PlayerDmgEffect, PlayerTargeting.Instance.AttackPoint.position, Quaternion.Euler(90, 0, 0));
+            }
+        }
+    }
 }

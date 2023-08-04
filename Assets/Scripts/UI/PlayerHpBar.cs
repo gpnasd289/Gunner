@@ -6,6 +6,24 @@ using TMPro;
 
 public class PlayerHpBar : MonoBehaviour
 {
+    public static PlayerHpBar Instance // singleton     
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<PlayerHpBar>();
+                if (instance == null)
+                {
+                    var instanceContainer = new GameObject("PlayerHpBar");
+                    instance = instanceContainer.AddComponent<PlayerHpBar>();
+                }
+            }
+            return instance;
+        }
+    }
+    private static PlayerHpBar instance;
+
     public Transform player;
     public Slider hpBar;
     public float maxHp;
@@ -23,7 +41,6 @@ public class PlayerHpBar : MonoBehaviour
     {
         transform.position = player.position;
         hpBar.value = currentHp / maxHp;
-        playerHpText.SetText("" + currentHp);
+        playerHpText.text = ("" + currentHp);
     }
-    
 }
